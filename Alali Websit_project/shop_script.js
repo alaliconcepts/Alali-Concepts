@@ -192,10 +192,10 @@ function sortProducts() {
     const cards = Array.from(grid.querySelectorAll('.product-card'));
     const sortValue = document.getElementById('sortPrice').value;
 
-    if (sortValue === 'default') {
-        location.reload(); 
-        return;
-    }
+if (sortValue === 'default') {
+    loadProducts(); 
+    return;
+}
 
     cards.sort((a, b) => {
         const getPrice = (el) => {
@@ -230,3 +230,55 @@ window.addEventListener('DOMContentLoaded', () => {
     // 2. Run the initial language set
     changeLanguage(savedLang);
 });
+
+const SUPA_URL = 'https://frnomwyygnaldhdfdkmd.supabase.co';
+const SUPA_KEY = 'sb_publishable_iGj0UaExKTiAuwaL8vcBqw_vnXFEWSJ';
+
+const headers = {
+  'apikey': SUPA_KEY,
+  'Authorization': `Bearer ${SUPA_KEY}`
+};
+
+async function loadProducts() {
+  const res = await fetch(`${SUPA_URL}/rest/v1/products?active=eq.true&order=id.asc`, { headers });
+  const products = await res.json();
+
+  const grid = document.querySelector('.product-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+
+  const loop = document.querySelector('.loop-images');
+  if (loop) loop.innerHTML = '';
+
+  products.forEach(p => {
+    const genderIcon = p.gender === 'men' ? 'fa-mars' :
+                       p.gender === 'women' ? 'fa-venus' : 'fa-venus-mars';
+    const genderTag = p.gender !== 'none' ? `
+      <span class="gender-tag">
+        <i class="fas ${genderIcon}"></i>
+        <span data-key="gender_${p.gender === 'men' ? 'm' : p.gender === 'women' ? 'f' : 'u'}">${p.gender}</span>
+      </span>` : '';
+
+    grid.innerHTML += `
+      <div class="product-card" data-price="${p.price_sort || 0}">
+        <div class="product-img"><img src="${p.image_url}" alt="${p.name}" loading="lazy"></div>
+        <div class="product-tag">
+          <span data-key="tag_${p.tag_key.toLowerCase()}">${p.tag_key}</span>${genderTag}
+        </div>
+        <h3>${p.name}</h3>
+        <p>${p.description_key}</p>
+        <div class="price">${p.price}</div>
+        <a href="contact_page.html" class="btn-buy" data-key="btn_contact">Contact for Details</a>
+      </div>`;
+
+    if (loop) {
+      loop.innerHTML += `<img src="${p.image_url}" alt="${p.name}" loading="lazy">`;
+    }
+  });
+
+  // Re-apply current language to new cards
+  const savedLang = localStorage.getItem('preferredLang') || 'en';
+  if (typeof changeLanguage === 'function') changeLanguage(savedLang);
+}
+
+loadProducts();
