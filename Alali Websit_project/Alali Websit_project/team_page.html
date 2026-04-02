@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team | ALALI Concepts</title>
+    <link rel="icon" type="image/x-icon" href="images\favicon-16x16.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="Home_style.css">
+    <link rel="stylesheet" href="team_style.css">
+    <script src="Home_script.js"></script>
+    <script src="team_script.js" defer></script>
+
+</head>
+
+<body>
+
+<!-- Background -->
+<div id="bg-canvas-container"></div>
+
+<!-- NAVBAR -->
+<header class="navbar fixed">
+    <div class="navbar-container">
+
+        <a href="index.html" class="logo-group">
+            <div class="logo-text">
+                <span class="logo-main">ALALI Concepts</span>
+                <span class="logo-sub">Premium Consultancy</span>
+            </div>
+        </a>
+
+        <div class="lang-switcher">
+            <select id="language-select">
+                <option value="en">EN</option>
+                <option value="fr">FR</option>
+                <option value="ar">AR</option>
+            </select>
+        </div>
+
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span><span></span><span></span>
+        </div>
+
+        <nav class="nav-links" id="nav-links">
+            <ul>
+                <li><a href="index.html" data-key="nav_home"><i class="fas fa-home"></i> HOME</a></li>
+                <li><a href="shop_page.html" data-key="nav_shop"><i class="fas fa-shopping-bag"></i> SHOP</a></li>
+                <li><a href="about_page.html" data-key="nav_about"><i class="fas fa-info-circle"></i> ABOUT</a></li>
+                <li><a href="team_page.html" class="active" data-key="nav_team"><i class="fas fa-users"></i> OUR TEAM</a></li>
+                <li><a href="services_page.html" data-key="nav_services"><i class="fas fa-briefcase"></i> SERVICES</a></li>
+                <li><a href="contact_page.html" data-key="nav_contact"><i class="fas fa-envelope"></i> CONTACT</a></li>
+                <li><a href="contact_page.html" class="nav-cta" data-key="nav_book"><i class="fas fa-calendar-alt"></i> BOOK NOW</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- TEAM SECTION -->
+<section class="team-section pro-services">
+    <div class="container">
+
+        <div class="section-heading text-center">
+            <h2 data-key="team_title">Meet Our Team</h2>
+            <p data-key="team_subtitle">Professionals dedicated to excellence and innovation.</p>
+        </div>
+
+<div class="team-grid">
+    <!-- Team loaded dynamically from Supabase -->
+</div>
+
+    </div>
+</section>
+
+<section class="agents-strip">
+    <div class="container">
+        <h3 data-key="ital_agent_title" style="color: #002D62; margin-bottom: 10px;">Official Ital Agents</h3>
+        <p data-key="ital_agent_p" style="margin-bottom: 20px;">Authorized Agents for Luxembourg. We are proud to be official agents for Ital fragrances.</p>
+        <div class="ital-box">
+            <img src="images/ital.jpg" class="ital-image" alt="Ital Logo">
+        </div>
+        <a href="shop_page.html" class="btn-outline-navy" data-key="ital_btn">Explore Collection</a>
+    </div>
+</section>
+
+<section class="contact-action-strip pro-contact">
+    <div class="container strip-flex-pro">
+        <div class="contact-info">
+            <span>📞 +352 661 771 180</span>
+            <span>✉️ contact@alali.lu</span>
+        </div>
+        <div class="contact-btn">
+            <a href="contact_page.html" class="btn-outline-navy" data-key="req_call">Request a Call</a>
+        </div>
+    </div>
+</section>
+
+    <footer class="pro-footer">
+        <div class="container footer-container">
+            <div style="flex: 2;">
+                <p data-key="footer_p1">Your trusted partner for IT solutions, professional translation services, and legal consultation in Luxembourg.</p>
+                <p style="margin-top: 10px;">© 2024 ALALI Concepts. All rights reserved.</p>
+            </div>
+            <div class="footer-links">
+                <h4 data-key="footer_pages" style="color: var(--red);">Pages</h4><br>
+                <a href="index.html" data-key="nav_home">Home</a>
+                <a href="about_page.html" data-key="nav_about">About</a>
+                <a href="services_page.html" data-key="nav_services">Services</a>
+                <a href="shop_page.html" data-key="nav_shop">Shop</a>
+                <a href="contact_page.html" data-key="nav_contact">Contact</a>
+            </div>
+            <div class="footer-contact">
+                <h4 data-key="footer_contact" style="color: var(--red);">Contact</h4>
+                <p>+352 661 771 180</p>
+                <p>contact@alali.lu</p>
+                <p>Luxembourg</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
+

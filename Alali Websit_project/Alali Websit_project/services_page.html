@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | ALALI Concepts</title>
+    <link rel="icon" type="image/x-icon" href="images\favicon-16x16.png">
+    <link rel="stylesheet" href="Home_style.css?v=2">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <script src="Home_script.js" defer></script>
+</head>
+<body class="pro-site">
+
+<header class="navbar fixed">
+    <div class="navbar-container">
+        <a href="index.html" class="logo-group">
+            <div class="logo-text">
+                <span class="logo-main">ALALI Concepts</span>
+                <span class="logo-sub">Premium Consultancy</span>
+            </div>
+        </a>
+
+                <div class="lang-switcher">
+            <select id="language-select">
+                <option value="en">EN</option>
+                <option value="fr">FR</option>
+                <option value="ar">AR</option>
+            </select>
+        </div>
+
+        <nav class="nav-links" id="nav-links">
+            <ul>
+                <li><a href="index.html" data-key="nav_home"><i class="fas fa-home"></i> HOME</a></li>
+                <li><a href="shop_page.html" data-key="nav_shop"><i class="fas fa-shopping-bag"></i> SHOP</a></li>
+                <li><a href="about_page.html" data-key="nav_about"><i class="fas fa-info-circle"></i> ABOUT</a></li>
+                <li><a href="team_page.html" data-key="nav_team"><i class="fas fa-users"></i> OUR TEAM</a></li>
+                <li><a href="services_page.html" class="active" data-key="nav_services"><i class="fas fa-briefcase"></i> SERVICES</a></li>
+                <li><a href="contact_page.html" data-key="nav_contact"><i class="fas fa-envelope"></i> CONTACT</a></li>
+                <li><a href="contact_page.html" class="nav-cta" data-key="nav_book"><i class="fas fa-calendar-alt"></i> BOOK NOW</a></li>
+            </ul>
+        </nav>
+
+        <button class="menu-toggle" id="mobile-menu" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
+
+    <main style="padding-top: 140px; background: #fff;">
+        <div class="container">
+            
+            <section style="margin: 0 auto 60px auto; max-width: 800px; text-align: center;">
+                <h1 data-key="ser_title" style="font-size: 3.5rem; color: var(--navy); margin-bottom: 15px;">Our Services</h1>
+                <p data-key="ser_sub" style="font-size: 1.2rem; color: #4a5568; line-height: 1.6;">
+                    Expert legal consultation, premium products, and professional services designed for Luxembourg businesses and individuals.
+                </p>
+            </section>
+            
+            <div class="services-grid-items">
+                <div class="pro-card" style="padding: 40px; margin-bottom: 80px; background-color: #ffffff !important; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-radius: 8px;">
+                    <i class="fas fa-language" style="font-size: 2rem; color: var(--red); margin-bottom: 15px;"></i>
+                    <h3 data-key="tr_h" style="color: var(--navy); margin-bottom: 15px; font-size: 1.5rem;">Professional Translation Services</h3>
+                    <p data-key="tr_p" style="font-size: 0.9rem; margin-bottom: 25px; color: #4a5568;">Expert translation services in 10+ languages by certified native speakers. We specialize in legal, court, and official document translation with absolute confidentiality.</p>
+                    
+                    <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
+                        <div>
+                            <h4 data-key="lang_euro" style="color: var(--red); margin-bottom: 15px;">European Languages</h4>
+                            <ul style="list-style: none; padding: 0; font-size: 0.9rem; line-height: 1.8;">
+                                <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="l_fr">French</span></li>
+                                <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="l_de">German</span></li>
+                                <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="l_lu">Luxembourgish</span></li>
+                                <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="l_en">English</span></li>
+                                <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="l_es">Spanish</span></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 data-key="lang_other" style="color: var(--red); margin-bottom: 15px;">Other Languages</h4>
+                            <ul style="list-style: none; padding: 0; font-size: 0.9rem; line-height: 1.8;">
+                                <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="l_ar">Arabic</span></li>
+                                <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="l_tr">Turkish</span></li>
+                                <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="l_er">Eritrean</span></li>
+                                <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="l_am">Amharic</span></li>
+                                <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="l_ti">Tigrinya</span></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 data-key="tr_spec" style="color: var(--red); margin-bottom: 15px;">Specialized Services</h4>
+                            <ul style="list-style: none; padding: 0; font-size: 0.9rem; line-height: 1.8;">
+                                <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="s_doc">Document Translation</span></li>
+                                <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="s_oral">Oral Translation</span></li>
+                                <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="s_leg">Legal Documents</span></li>
+                                <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="s_court">Court Interpretation</span></li>
+                                <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="s_sworn">Sworn Translators</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section style="background: linear-gradient(135deg, var(--navy) 0%, #001a3a 100%); color: #fff; padding: 60px; border-radius: 20px; margin-bottom: 80px;">
+                <div style="margin-bottom: 40px;">
+                    <i class="fas fa-laptop-code" style="font-size: 2.5rem; color: var(--gold); margin-bottom: 15px;"></i>
+                    <h2 data-key="it_h" style="color: #fff;">IT Solutions & Development</h2>
+                    <p data-key="it_p" style="opacity: 0.9;">Comprehensive technology solutions to streamline your business operations, enhance productivity, and drive digital transformation.</p>
+                </div>
+                <div class="grid services-grid-items">
+                    <div>
+                        <i class="fas fa-globe" style="font-size: 1.5rem; color: var(--gold); margin-bottom: 10px;"></i>
+                        <h4 data-key="it_web">Website Development</h4>
+                        <p data-key="it_web_p" style="font-size: 0.9rem;">Performance-optimized, visually appealing websites</p>
+                    </div>
+                    <div>
+                        <i class="fas fa-mobile-alt" style="font-size: 1.5rem; color: var(--gold); margin-bottom: 10px;"></i>
+                        <h4 data-key="it_app">Mobile Apps</h4>
+                        <p data-key="it_app_p" style="font-size: 0.9rem;">User-friendly mobile and desktop applications</p>
+                    </div>
+                    <div>
+                        <i class="fas fa-chart-line" style="font-size: 1.5rem; color: var(--gold); margin-bottom: 10px;"></i>
+                        <h4 data-key="it_crm">CRM & ERP</h4>
+                        <p data-key="it_crm_p" style="font-size: 0.9rem;">Custom customer relationship management & enterprise planning</p>
+                    </div>
+                    <div>
+                        <i class="fas fa-microchip" style="font-size: 1.5rem; color: var(--gold); margin-bottom: 10px;"></i>                
+                        <h4 data-key="it_digi">Digital Transformation</h4>
+                        <p data-key="it_digi_p" style="font-size: 0.9rem;">Process digitization and tailored software support</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="grid services-grid-items" style="margin-bottom: 80px;">
+                <div class="pro-card" style="padding: 40px; background: #ffffff;">
+                    <i class="fas fa-gavel" style="font-size: 2rem; color: var(--red); margin-bottom: 15px;"></i>
+                    <h3 data-key="leg_h" style="color: var(--navy); margin-bottom: 15px;">Legal Consultation & Documents</h3>
+                    <p data-key="leg_p" style="font-size: 0.9rem; margin-bottom: 15px;">Expert legal consultation and document preparation services for businesses and individuals in Luxembourg.</p>
+                    <ul style="list-style: none; padding: 0; font-size: 0.9rem; line-height: 1.8;">
+                        <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="leg_1">Legal consultation</span></li>
+                        <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="leg_2">Document preparation</span></li>
+                        <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="leg_3">Compliance support</span></li>
+                        <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="leg_4">Administrative services</span></li>
+                    </ul>
+                </div>
+                <div class="pro-card" style="padding: 40px; background: #ffffff;">
+                    <i class="fas fa-gem" style="font-size: 2rem; color: var(--red); margin-bottom: 15px;"></i>
+                    <h3 data-key="prem_h" style="color: var(--navy); margin-bottom: 15px;">Premium Products</h3>
+                    <p data-key="prem_p" style="font-size: 0.9rem; margin-bottom: 15px;">Curated selection of luxury perfumes and specialty products for the Luxembourg market.</p>
+                    <ul style="list-style: none; padding: 0; font-size: 0.9rem; line-height: 1.8;">
+                        <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="prem_1">Premium perfumes</span></li>
+                        <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="prem_2">Luxury fragrances</span></li>
+                        <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="prem_3">Specialty products</span></li>
+                        <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="prem_4">Expert consultation</span></li>
+                    </ul>
+                </div>
+                <div class="pro-card" style="padding: 40px; background: #ffffff;">
+                    <i class="fas fa-building" style="font-size: 2rem; color: var(--red); margin-bottom: 15px;"></i>
+                    <h3 data-key="bus_h" style="color: var(--navy); margin-bottom: 15px;">Business Services</h3>
+                    <p data-key="bus_p" style="font-size: 0.9rem; margin-bottom: 15px;">Complete support for business formation, registration, and ongoing compliance in Luxembourg.</p>
+                    <ul style="list-style: none; padding: 0; font-size: 0.9rem; line-height: 1.8;">
+                        <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="bus_1">Company formation</span></li>
+                        <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="bus_2">Business registration</span></li>
+                        <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="bus_3">Compliance assistance</span></li>
+                        <li><i class="fas fa-check" style="color: var(--red); margin-right: 8px;"></i> <span data-key="bus_4">Ongoing support</span></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+                <section style="text-align: center; background: linear-gradient(135deg, #132036, #132036); padding: 60px; border-radius: 20px; margin-bottom: 80px;">
+                <i class="fas fa-calendar-check" style="font-size: 3rem; color: var(--red); margin-bottom: 20px;"></i>
+                <h2 data-key="ready_h" style="color: var(--white); margin-bottom: 15px;">Ready to Get Started?</h2>
+                <p data-key="ready_p" style="margin-bottom: 30px; color: #ffffff;">Contact us today to discuss your specific needs and learn how our services can benefit your business.</p>
+                <a href="contact_page.html" class="btn-solid-red" style="padding: 15px 40px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; background: var(--red); color: white; border-radius: 30px;">
+                    <i class="fas fa-arrow-right"></i> <span data-key="ready_btn">Contact Us Today</span>
+                </a>
+            </section>
+
+    <section class="contact-action-strip pro-contact">
+    <div class="container strip-flex-pro">
+        <div class="contact-info">
+            <span>📞 +352 661 771 180</span>
+            <span>✉️ contact@alali.lu</span>
+        </div>
+        <div class="contact-btn">
+            <a href="contact_page.html" class="btn-outline-navy" data-key="req_call">Request a Call</a>
+        </div>
+    </div>
+</section>
+
+    <footer class="pro-footer">
+        <div class="container footer-container">
+            <div style="flex: 2; min-width: 300px;">
+                <p data-key="footer_p1">Your trusted partner for IT solutions, professional translation services, and legal consultation in Luxembourg.</p>
+                <p style="margin-top: 10px;">© 2024 ALALI Concepts. All rights reserved.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4 data-key="footer_pages" style="color: var(--red); margin-bottom: 15px;">Pages</h4><br>
+                <a href="index.html" data-key="nav_home">Home</a>
+                <a href="about_page.html" data-key="nav_about">About</a>
+                <a href="services_page.html" data-key="nav_services">Services</a>
+                <a href="shop_page.html" data-key="nav_shop">Shop</a>
+                <a href="contact_page.html" data-key="nav_contact">Contact</a>
+            </div>
+
+            <div class="footer-contact">
+                <h4 data-key="footer_contact" style="color: var(--red); margin-bottom: 15px;">Contact</h4>
+                <p><i class="fas fa-phone"></i> +352 661 771 180</p>
+                <p><i class="fas fa-envelope"></i> contact@alali.lu</p>
+                <p><i class="fas fa-map-marker-alt"></i> <span data-key="lux_name">Luxembourg</span></p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

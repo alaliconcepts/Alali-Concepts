@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ALALI Admin Panel</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f4f6fb; color: #333; }
+    #login-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; gap: 15px; }
+    #login-screen h2 { font-size: 1.8rem; color: #002D62; }
+    #login-screen input { padding: 12px 20px; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; width: 280px; }
+    #login-screen button { padding: 12px 30px; background: #002D62; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; }
+    #admin-panel { display: none; max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+    h1 { color: #002D62; margin-bottom: 30px; }
+    .tabs { display: flex; gap: 10px; margin-bottom: 30px; }
+    .tab { padding: 10px 25px; border: 2px solid #002D62; border-radius: 30px; cursor: pointer; font-weight: 600; color: #002D62; background: white; }
+    .tab.active { background: #002D62; color: white; }
+    .panel { display: none; }
+    .panel.active { display: block; }
+    .form-box { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); margin-bottom: 30px; }
+    .form-box h3 { color: #002D62; margin-bottom: 20px; }
+    input[type=text], input[type=file], select, textarea {
+      width: 100%; padding: 10px 14px; margin: 5px 0 15px;
+      border: 1px solid #ddd; border-radius: 8px; font-size: 0.95rem;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .btn-add { padding: 12px 28px; background: #c0392b; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600; }
+    .btn-add:disabled { opacity: 0.5; cursor: not-allowed; }
+    .item-list { background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); overflow: hidden; }
+    .item-row { display: flex; align-items: center; gap: 15px; padding: 14px 20px; border-bottom: 1px solid #f0f0f0; }
+    .item-row:last-child { border-bottom: none; }
+    .item-row img { width: 55px; height: 55px; object-fit: cover; border-radius: 8px; }
+    .item-info { flex: 1; }
+    .item-info strong { display: block; color: #002D62; }
+    .item-info span { font-size: 0.85rem; color: #888; }
+    .btn-del { padding: 7px 15px; background: #c0392b; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
+    .btn-toggle { padding: 7px 15px; background: #27ae60; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-right: 6px; }
+    .inactive { opacity: 0.45; }
+    .status-msg { padding: 12px 18px; border-radius: 8px; margin-bottom: 15px; font-weight: 600; display: none; }
+    .status-msg.ok { background: #d4edda; color: #155724; display: block; }
+    .status-msg.err { background: #f8d7da; color: #721c24; display: block; }
+    label { font-weight: 600; font-size: 0.9rem; color: #444; }
+  </style>
+</head>
+<body>
+
+<div id="login-screen">
+  <h2>🔐 ALALI Admin</h2>
+  <input type="password" id="pass" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')checkPass()">
+  <button onclick="checkPass()">Login</button>
+</div>
+
+<div id="admin-panel">
+  <h1>⚙️ ALALI Admin Panel</h1>
+
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('products', this)">🛍️ Products</div>
+    <div class="tab" onclick="switchTab('team', this)">👥 Team</div>
+  </div>
+
+  <!-- PRODUCTS PANEL -->
+  <div class="panel active" id="panel-products">
+    <div class="form-box">
+      <h3>Add New Product</h3>
+      <div id="msg-product" class="status-msg"></div>
+      <div class="form-row">
+        <div>
+          <label>Product Name</label>
+          <input type="text" id="p-name" placeholder="e.g. ITAL MILANO 100ml">
+        </div>
+        <div>
+          <label>Price (display)</label>
+          <input type="text" id="p-price" placeholder="e.g. 120€">
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label>Price (number for sorting)</label>
+          <input type="text" id="p-price-sort" placeholder="e.g. 120">
+        </div>
+        <div>
+          <label>Category</label>
+          <select id="p-tag">
+            <option value="Perfume">Perfume</option>
+            <option value="Diffuseur">Diffuseur</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label>Gender</label>
+          <select id="p-gender">
+            <option value="unisex">Unisex</option>
+            <option value="men">Men</option>
+            <option value="women">Women</option>
+            <option value="none">No gender tag</option>
+          </select>
+        </div>
+        <div>
+          <label>Short Description</label>
+          <input type="text" id="p-desc" placeholder="e.g. Inspired by Milan's refined sophistication.">
+        </div>
+      </div>
+      <label>Product Image</label>
+      <input type="file" id="p-image" accept="image/*">
+      <button class="btn-add" id="btn-add-product" onclick="addProduct()">
+        <i class="fas fa-plus"></i> Upload & Add Product
+      </button>
+    </div>
+    <div class="item-list" id="product-list"></div>
+  </div>
+
+  <!-- TEAM PANEL -->
+  <div class="panel" id="panel-team">
+    <div class="form-box">
+      <h3>Add Team Member</h3>
+      <div id="msg-team" class="status-msg"></div>
+      <div class="form-row">
+        <div>
+          <label>Full Name</label>
+          <input type="text" id="t-name" placeholder="e.g. Muhannad Alali">
+        </div>
+        <div>
+          <label>Role / Title</label>
+          <input type="text" id="t-role" placeholder="e.g. CEO & Founder">
+        </div>
+      </div>
+      <label>Display Order (1 = first)</label>
+      <input type="text" id="t-order" placeholder="e.g. 1">
+      <label>Photo</label>
+      <input type="file" id="t-image" accept="image/*">
+      <button class="btn-add" id="btn-add-team" onclick="addTeamMember()">
+        <i class="fas fa-plus"></i> Upload & Add Member
+      </button>
+    </div>
+    <div class="item-list" id="team-list"></div>
+  </div>
+</div>
+
+<script>
+const SUPA_URL = 'https://frnomwyygnaldhdfdkmd.supabase.co';
+const SUPA_KEY = 'sb_publishable_iGj0UaExKTiAuwaL8vcBqw_vnXFEWSJ';
+const ADMIN_PASS = 'alali2024'; // ← change this to your own password!
+
+const H = { 'apikey': SUPA_KEY, 'Authorization': `Bearer ${SUPA_KEY}` };
+
+function checkPass() {
+  if (document.getElementById('pass').value === ADMIN_PASS) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-panel').style.display = 'block';
+    loadProducts(); loadTeam();
+  } else alert('Wrong password');
+}
+
+function switchTab(tab, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelector(`#panel-${tab}`).classList.add('active');
+  el.classList.add('active');
+}
+
+function showMsg(id, text, type) {
+  const el = document.getElementById(id);
+  el.textContent = text;
+  el.className = `status-msg ${type}`;
+  setTimeout(() => el.style.display = 'none', 4000);
+}
+
+async function uploadImage(file, bucket) {
+  const fileName = Date.now() + '_' + file.name.replace(/\s/g, '_');
+  const res = await fetch(`${SUPA_URL}/storage/v1/object/${bucket}/${fileName}`, {
+    method: 'POST',
+    headers: { ...H, 'Content-Type': file.type },
+    body: file
+  });
+  if (!res.ok) throw new Error('Image upload failed');
+  return `${SUPA_URL}/storage/v1/object/public/${bucket}/${fileName}`;
+}
+
+// ── PRODUCTS ──────────────────────────────────────────
+async function loadProducts() {
+  const res = await fetch(`${SUPA_URL}/rest/v1/products?order=id.asc`, { headers: H });
+  const items = await res.json();
+  const list = document.getElementById('product-list');
+  list.innerHTML = '';
+  if (!items.length) { list.innerHTML = '<p style="padding:20px;color:#888">No products yet. Add your first one above!</p>'; return; }
+  items.forEach(p => {
+    list.innerHTML += `
+      <div class="item-row ${p.active ? '' : 'inactive'}" id="prod-${p.id}">
+        <img src="${p.image_url}" alt="${p.name}" onerror="this.src='https://placehold.co/55x55'">
+        <div class="item-info">
+          <strong>${p.name}</strong>
+          <span>${p.price} · ${p.tag_key} · ${p.gender}</span>
+        </div>
+        <button class="btn-toggle" onclick="toggleProduct(${p.id}, ${p.active})">
+          ${p.active ? 'Hide' : 'Show'}
+        </button>
+        <button class="btn-del" onclick="deleteProduct(${p.id})">Delete</button>
+      </div>`;
+  });
+}
+
+async function addProduct() {
+  const btn = document.getElementById('btn-add-product');
+  const file = document.getElementById('p-image').files[0];
+  if (!file) return showMsg('msg-product', 'Please select an image.', 'err');
+  if (!document.getElementById('p-name').value) return showMsg('msg-product', 'Please enter a name.', 'err');
+
+  btn.disabled = true; btn.textContent = 'Uploading...';
+  try {
+    const image_url = await uploadImage(file, 'product-images');
+    await fetch(`${SUPA_URL}/rest/v1/products`, {
+      method: 'POST',
+      headers: { ...H, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+      body: JSON.stringify({
+        name: document.getElementById('p-name').value,
+        price: document.getElementById('p-price').value,
+        price_sort: parseFloat(document.getElementById('p-price-sort').value) || 0,
+        description_key: document.getElementById('p-desc').value,
+        tag_key: document.getElementById('p-tag').value,
+        gender: document.getElementById('p-gender').value,
+        image_url, active: true
+      })
+    });
+    showMsg('msg-product', '✅ Product added successfully!', 'ok');
+    document.getElementById('p-name').value = '';
+    document.getElementById('p-price').value = '';
+    document.getElementById('p-price-sort').value = '';
+    document.getElementById('p-desc').value = '';
+    document.getElementById('p-image').value = '';
+    loadProducts();
+  } catch(e) { showMsg('msg-product', '❌ Error: ' + e.message, 'err'); }
+  btn.disabled = false; btn.innerHTML = '<i class="fas fa-plus"></i> Upload & Add Product';
+}
+
+async function toggleProduct(id, current) {
+  await fetch(`${SUPA_URL}/rest/v1/products?id=eq.${id}`, {
+    method: 'PATCH',
+    headers: { ...H, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+    body: JSON.stringify({ active: !current })
+  });
+  loadProducts();
+}
+
+async function deleteProduct(id) {
+  if (!confirm('Delete this product permanently?')) return;
+  await fetch(`${SUPA_URL}/rest/v1/products?id=eq.${id}`, { method: 'DELETE', headers: H });
+  loadProducts();
+}
+
+// ── TEAM ──────────────────────────────────────────────
+async function loadTeam() {
+  const res = await fetch(`${SUPA_URL}/rest/v1/team?order=display_order.asc`, { headers: H });
+  const items = await res.json();
+  const list = document.getElementById('team-list');
+  list.innerHTML = '';
+  if (!items.length) { list.innerHTML = '<p style="padding:20px;color:#888">No team members yet. Add your first one above!</p>'; return; }
+  items.forEach(m => {
+    list.innerHTML += `
+      <div class="item-row">
+        <img src="${m.image_url}" alt="${m.name}" onerror="this.src='https://placehold.co/55x55'">
+        <div class="item-info">
+          <strong>${m.name}</strong>
+          <span>${m.role} · Order: ${m.display_order}</span>
+        </div>
+        <button class="btn-del" onclick="deleteTeamMember(${m.id})">Delete</button>
+      </div>`;
+  });
+}
+
+async function addTeamMember() {
+  const btn = document.getElementById('btn-add-team');
+  const file = document.getElementById('t-image').files[0];
+  if (!file) return showMsg('msg-team', 'Please select a photo.', 'err');
+  if (!document.getElementById('t-name').value) return showMsg('msg-team', 'Please enter a name.', 'err');
+
+  btn.disabled = true; btn.textContent = 'Uploading...';
+  try {
+    const image_url = await uploadImage(file, 'product-images');
+    await fetch(`${SUPA_URL}/rest/v1/team`, {
+      method: 'POST',
+      headers: { ...H, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+      body: JSON.stringify({
+        name: document.getElementById('t-name').value,
+        role: document.getElementById('t-role').value,
+        display_order: parseInt(document.getElementById('t-order').value) || 99,
+        image_url
+      })
+    });
+    showMsg('msg-team', '✅ Team member added!', 'ok');
+    document.getElementById('t-name').value = '';
+    document.getElementById('t-role').value = '';
+    document.getElementById('t-order').value = '';
+    document.getElementById('t-image').value = '';
+    loadTeam();
+  } catch(e) { showMsg('msg-team', '❌ Error: ' + e.message, 'err'); }
+  btn.disabled = false; btn.innerHTML = '<i class="fas fa-plus"></i> Upload & Add Member';
+}
+
+async function deleteTeamMember(id) {
+  if (!confirm('Delete this team member?')) return;
+  await fetch(`${SUPA_URL}/rest/v1/team?id=eq.${id}`, { method: 'DELETE', headers: H });
+  loadTeam();
+}
+</script>
+</body>
+</html>
