@@ -221,7 +221,7 @@ body.shop-site {
 }
 
 .nav-links a.active::before {
-    width: 70%; 
+    width: 60%; 
 }
 
 /*-- Icon Styling --*/
