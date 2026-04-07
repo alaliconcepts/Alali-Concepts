@@ -1,14 +1,3 @@
-/* ============================================================
-   SHOP PAGE STYLES - WITH BEAUTIFUL NAVBAR
-   ============================================================ */
-/* ============================================================
-   @import MUST be first — before any other rules
-   ============================================================ */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
-
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
-
-
 
 /* --- 1. CORE SETUP --- */
 :root {
@@ -204,7 +193,7 @@ body.shop-site {
 .nav-links a::before {
     content: '';
     position: absolute;
-    bottom: 4px; /* Slightly raised from the very bottom */
+    bottom: 4px; 
     left: 50%;
     width: 0;
     height: 2px;
@@ -254,18 +243,32 @@ body.shop-site {
 }
 
 .nav-links a.nav-cta:hover {
-    background: var(--navy, #002D62);
-    color: white;
+    background: var(--white);
+    color: var(--red) !important;
     transform: translateY(-2px);
+}
+
+.nav-links a.nav-cta:hover i {
+    color: var(--red) !important;
 }
 
 .nav-links a.nav-cta::before {
     display: none; 
 }
 
-.nav-cta::before { display: none; }
-.nav-cta:hover { background: linear-gradient(135deg, #b91c1c, var(--red)); transform: translateY(-2px) !important; color: white !important; }
-.nav-cta i { color: white; }
+.nav-cta::before { 
+    display: none; 
+}
+
+.nav-cta:hover { 
+    background: linear-gradient(135deg, #b91c1c, var(--red)); 
+    transform: translateY(-2px) !important; 
+    color: white !important; 
+}
+
+.nav-cta i { 
+    color: white; 
+}
 
 .menu-toggle {
     display: none;
@@ -666,6 +669,7 @@ body.shop-site {
 @media (max-width: 1024px) {
     .nav-links a { padding: 8px 12px; font-size: 0.85rem; }
     .logo-main { font-size: 1.2rem; }
+    .nav-logo { height: 60px; }
     .Perfume-images h1 { font-size: 3rem; }
     .loop-images img { height: 100px; }
     .product-grid { gap: 30px; }
@@ -694,8 +698,8 @@ body.shop-site {
 
     /* Logo */
     .logo-text { display: flex; }
-    .logo-main { font-size: 1.1rem; }
-    .logo-sub { font-size: 0.6rem; }
+    .logo-main { font-size: 1.4rem; }
+    .logo-sub { font-size: 0.8rem; }
 
     /* Language switcher */
       .lang-switcher {
@@ -737,10 +741,19 @@ body.shop-site {
         justify-content: flex-start;
         border-radius: 12px;
         white-space: normal;
-        color: var(--navy) !important;
+
         background: transparent;
         -webkit-tap-highlight-color: transparent;
     }
+
+    .nav-links a.nav-cta {
+    background: linear-gradient(135deg, var(--red), #b91c1c) !important;
+    color: white !important;
+    margin-left: 0;
+    margin-top: 10px;
+    text-align: left;
+    justify-content: left;
+}
 
     .nav-links a:hover {
         transform: translateX(8px);
@@ -753,14 +766,6 @@ body.shop-site {
         color: var(--red) !important;
     }
 
-    .nav-cta {
-        background: linear-gradient(135deg, var(--red), #b91c1c) !important;
-        color: white !important;
-        margin-left: 0;
-        margin-top: 10px;
-        text-align: center;
-        justify-content: center;
-    }
 
     /* Hero */
     .Perfume-images { padding: 80px 0 30px; }
