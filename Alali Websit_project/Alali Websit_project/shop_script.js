@@ -259,17 +259,17 @@ async function loadProducts() {
         <span data-key="gender_${p.gender === 'men' ? 'm' : p.gender === 'women' ? 'f' : 'u'}">${p.gender}</span>
       </span>` : '';
 
-    grid.innerHTML += `
-      <div class="product-card" data-price="${p.price_sort || 0}">
-        <div class="product-img"><img src="${p.image_url}" alt="${p.name}" loading="lazy"></div>
-        <div class="product-tag">
-          <span data-key="tag_${p.tag_key.toLowerCase()}">${p.tag_key}</span>${genderTag}
-        </div>
-        <h3>${p.name}</h3>
-        <p>${p.description_key}</p>
-        <div class="price">${p.price}</div>
-        <a href="contact_page.html" class="btn-buy" data-key="btn_contact">Contact for Details</a>
-      </div>`;
+grid.innerHTML += `
+  <div class="product-card" data-price="${p.price_sort || 0}">
+    <div class="product-img"><img src="${p.image_url}" alt="${p.name}" loading="lazy"></div>
+    <div class="product-tag">
+      <span data-key="tag_${p.tag_key.toLowerCase()}">${p.tag_key}</span>${genderTag}
+    </div>
+    <h3>${p.name}</h3>
+    <p>${p.description}</p>
+    <div class="price">${p.price}</div>
+    <a href="contact_page.html" class="btn-buy" data-key="btn_contact">Contact for Details</a>
+  </div>`;
 
     if (loop) {
       loop.innerHTML += `<img src="${p.image_url}" alt="${p.name}" loading="lazy">`;

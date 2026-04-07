@@ -132,14 +132,16 @@
         ready_btn: "Contact Us Today",
         footer_p1: "Your trusted partner for IT, Translation, and Legal services.",
         footer_pages: "Pages", footer_contact: "Contact", lux_name: "Luxembourg",
-                    dir: "ltr",
-            nav_home: "HOME", nav_shop: "SHOP", nav_about: "ABOUT",
-            nav_team: "OUR TEAM", nav_services: "SERVICES",
-            nav_contact: "CONTACT", nav_book: "BOOK NOW",
+        dir: "ltr",
+        nav_home: "HOME", nav_shop: "SHOP", nav_about: "ABOUT",
+        nav_team: "OUR TEAM", nav_services: "SERVICES",
+        nav_contact: "CONTACT", nav_book: "BOOK NOW",
 
-            team_title: "Meet Our Team",
-            team_subtitle: "Professionals dedicated to excellence and innovation.",
-
+nav_home: "HOME", nav_shop: "SHOP", nav_about: "ABOUT",
+nav_team: "OUR TEAM", nav_services: "SERVICES",
+nav_contact: "CONTACT", nav_book: "BOOK NOW",
+team_title: "Meet Our Team",
+team_subtitle: "Professionals dedicated to excellence and innovation.",  
 
         },
 
@@ -278,6 +280,8 @@
             nav_home: "ACCUEIL", nav_shop: "BOUTIQUE", nav_about: "À PROPOS",
             nav_team: "NOTRE ÉQUIPE", nav_services: "SERVICES",
             nav_contact: "CONTACT", nav_book: "RÉSERVER",
+            team_title: "Notre Équipe",
+team_subtitle: "Des professionnels dédiés à l'excellence et à l'innovation.",
 
         },
 
@@ -419,10 +423,11 @@
         footer_p1: "شريكك الموثوق لحلول تكنولوجيا المعلومات والترجمة والاستشارات القانونية.",
         footer_pages: "الصفحات", footer_contact: "اتصل بنا", lux_name: "لوكسمبورغ",
                     dir: "rtl",
-            nav_home: "الرئيسية", nav_shop: "المتجر", nav_about: "من نحن",
-            nav_team: "فريقنا", nav_services: "خدماتنا",
-            nav_contact: "اتصل بنا", nav_book: "احجز الآن",
-
+nav_home: "الرئيسية", nav_shop: "المتجر", nav_about: "من نحن",
+nav_team: "فريقنا", nav_services: "خدماتنا",
+nav_contact: "اتصل بنا", nav_book: "احجز الآن",
+team_title: "تعرف على فريقنا",
+team_subtitle: "محترفون مكرسون للتميز والابتكار.",
 
         }
 
@@ -591,7 +596,7 @@ async function loadProducts() {
           <span data-key="tag_${p.tag_key.toLowerCase()}">${p.tag_key}</span>${genderTag}
         </div>
         <h3>${p.name}</h3>
-        <p>${p.description_key}</p>
+        <p>${p.description}</p>
         <div class="price">${p.price}</div>
         <a href="contact_page.html" class="btn-buy" data-key="btn_contact">Contact for Details</a>
       </div>`;
@@ -606,3 +611,26 @@ async function loadProducts() {
 }
 
 loadProducts();
+
+async function loadTeam() {
+  const res = await fetch(`${SUPA_URL}/rest/v1/team?order=display_order.asc`, {
+    headers: { 'apikey': SUPA_KEY, 'Authorization': `Bearer ${SUPA_KEY}` }
+  });
+  const members = await res.json();
+
+  const grid = document.querySelector('.team-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+
+  members.forEach(m => {
+    grid.innerHTML += `
+      <div class="pro-card team-card">
+        <img src="${m.image_url}" alt="${m.name}">
+        <h3>${m.name}</h3>
+        <p>${m.role}</p>
+      </div>`;
+  });
+}
+
+
+loadTeam();

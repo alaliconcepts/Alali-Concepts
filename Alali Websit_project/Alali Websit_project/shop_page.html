@@ -4,10 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop | ALALI Concepts Premium Products</title>
-    <link rel="icon" type="image/x-icon" href="images\favicon-16x16.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="shop_style.css">    
-    
+
+    <meta name="description" content="Premium luxury perfumes and products by ALALI Concepts in Luxembourg.">
+
+    <link rel="icon" type="image/x-icon" href="images/favicon-16x16.png">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="shop_style.css">
+
+    <!-- Scripts -->
     <script src="Home_script.js" defer></script>
 </head>
 
@@ -58,18 +69,18 @@
         </div>
     </div>
 
-    <div class="ticker-shelf">
-        <div class="collection-ticker">
-            <div class="loop-images">
-                <!-- Images loaded dynamically from Supabase -->
-            </div>
+<div class="ticker-shelf">
+    <div class="collection-ticker">
+        <div class="loop-images">
+            <!-- Images loaded dynamically from Supabase -->
         </div>
     </div>
+</div>
 </section>
 
 <main>
     <div class="filter-controls">
-        <label for="sortPrice">Sort by:</label>
+        <label for="sortPrice" data-key="sort_label">Sort by:</label>
         <select id="sortPrice" onchange="sortProducts()">
             <option value="default">Featured</option>
             <option value="low-high">Price: Low to High</option>
@@ -87,7 +98,7 @@
         <h2 data-key="agent_title">Official Ital Agents</h2>
         <p data-key="agent_desc">We are proud authorized agents for Ital fragrances in Luxembourg.</p>
         <div class="ital-box">
-            <img src="images/ital.jpg" class="ital-logo" alt="Ital Logo">
+        <img src="images/ital.jpg" class="ital-logo" alt="Ital Logo">
         </div>
     </div>
 </section>
@@ -110,6 +121,7 @@
                 <p data-key="footer_p1">Your trusted partner for IT solutions, professional translation services, and legal consultation in Luxembourg.</p>
                 <p style="margin-top: 10px;">© 2024 ALALI Concepts. All rights reserved.</p>
             </div>
+            
             <div class="footer-links">
                 <h4 data-key="footer_pages" style="color: var(--red);">Pages</h4><br>
                 <a href="index.html" data-key="nav_home">Home</a>
@@ -118,6 +130,7 @@
                 <a href="shop_page.html" data-key="nav_shop">Shop</a>
                 <a href="contact_page.html" data-key="nav_contact">Contact</a>
             </div>
+
             <div class="footer-contact">
                 <h4 data-key="footer_contact" style="color: var(--red);">Contact</h4>
                 <p>+352 661 771 180</p>

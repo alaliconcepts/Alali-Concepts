@@ -36,6 +36,7 @@
     .item-info span { font-size: 0.85rem; color: #888; }
     .btn-del { padding: 7px 15px; background: #c0392b; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
     .btn-toggle { padding: 7px 15px; background: #27ae60; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-right: 6px; }
+    .btn-edit { padding: 7px 15px; background: #f39c12; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-right: 6px; }
     .inactive { opacity: 0.45; }
     .status-msg { padding: 12px 18px; border-radius: 8px; margin-bottom: 15px; font-weight: 600; display: none; }
     .status-msg.ok { background: #d4edda; color: #155724; display: block; }
@@ -98,8 +99,8 @@
           </select>
         </div>
         <div>
-          <label>Short Description</label>
-          <input type="text" id="p-desc" placeholder="e.g. Inspired by Milan's refined sophistication.">
+          <label>Short Description (use key e.g. p1_desc)</label>
+          <input type="text" id="p-desc" placeholder="e.g. p1_desc">
         </div>
       </div>
       <label>Product Image</label>
@@ -141,7 +142,7 @@
 <script>
 const SUPA_URL = 'https://frnomwyygnaldhdfdkmd.supabase.co';
 const SUPA_KEY = 'sb_publishable_iGj0UaExKTiAuwaL8vcBqw_vnXFEWSJ';
-const ADMIN_PASS = 'alali2024'; // ← change this to your own password!
+const ADMIN_PASS = 'alali2024';
 
 const H = { 'apikey': SUPA_KEY, 'Authorization': `Bearer ${SUPA_KEY}` };
 
@@ -196,6 +197,7 @@ async function loadProducts() {
         <button class="btn-toggle" onclick="toggleProduct(${p.id}, ${p.active})">
           ${p.active ? 'Hide' : 'Show'}
         </button>
+        <button class="btn-edit" onclick="editProduct(${p.id}, '${p.name.replace(/'/g, "\\'")}', '${p.price}', ${p.price_sort || 0}, '${p.description_key}', '${p.tag_key}', '${p.gender}')">Edit</button>
         <button class="btn-del" onclick="deleteProduct(${p.id})">Delete</button>
       </div>`;
   });
@@ -232,6 +234,59 @@ async function addProduct() {
     loadProducts();
   } catch(e) { showMsg('msg-product', '❌ Error: ' + e.message, 'err'); }
   btn.disabled = false; btn.innerHTML = '<i class="fas fa-plus"></i> Upload & Add Product';
+}
+
+function editProduct(id, name, price, price_sort, desc, tag, gender) {
+  document.getElementById('p-name').value = name;
+  document.getElementById('p-price').value = price;
+  document.getElementById('p-price-sort').value = price_sort;
+  document.getElementById('p-desc').value = desc;
+  document.getElementById('p-tag').value = tag;
+  document.getElementById('p-gender').value = gender;
+  document.getElementById('p-image').value = '';
+
+  const btn = document.getElementById('btn-add-product');
+  btn.innerHTML = '<i class="fas fa-save"></i> Save Changes';
+  btn.onclick = async function() {
+    btn.disabled = true; btn.textContent = 'Saving...';
+    try {
+      const file = document.getElementById('p-image').files[0];
+      let image_url = null;
+      if (file) image_url = await uploadImage(file, 'product-images');
+
+      const updateData = {
+        name: document.getElementById('p-name').value,
+        price: document.getElementById('p-price').value,
+        price_sort: parseFloat(document.getElementById('p-price-sort').value) || 0,
+        description_key: document.getElementById('p-desc').value,
+        tag_key: document.getElementById('p-tag').value,
+        gender: document.getElementById('p-gender').value,
+      };
+      if (image_url) updateData.image_url = image_url;
+
+      await fetch(`${SUPA_URL}/rest/v1/products?id=eq.${id}`, {
+        method: 'PATCH',
+        headers: { ...H, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+        body: JSON.stringify(updateData)
+      });
+
+      showMsg('msg-product', '✅ Product updated!', 'ok');
+      document.getElementById('p-name').value = '';
+      document.getElementById('p-price').value = '';
+      document.getElementById('p-price-sort').value = '';
+      document.getElementById('p-desc').value = '';
+      document.getElementById('p-image').value = '';
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-plus"></i> Upload & Add Product';
+      btn.onclick = addProduct;
+      loadProducts();
+    } catch(e) {
+      showMsg('msg-product', '❌ Error: ' + e.message, 'err');
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-save"></i> Save Changes';
+    }
+  };
+  document.querySelector('.form-box').scrollIntoView({ behavior: 'smooth' });
 }
 
 async function toggleProduct(id, current) {
