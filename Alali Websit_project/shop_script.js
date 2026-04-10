@@ -281,4 +281,76 @@ grid.innerHTML += `
   if (typeof changeLanguage === 'function') changeLanguage(savedLang);
 }
 
+async function loadProducts() {
+  const res = await fetch(`${SUPA_URL}/rest/v1/products?active=eq.true&order=id.asc`, { headers });
+  const products = await res.json();
+
+  const grid = document.querySelector('.product-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+
+  const loop = document.querySelector('.loop-images');
+  if (loop) loop.innerHTML = '';
+
+  products.forEach(p => {
+    const genderIcon = p.gender === 'men' ? 'fa-mars' :
+                       p.gender === 'women' ? 'fa-venus' : 'fa-venus-mars';
+    const genderTag = p.gender !== 'none' ? `
+      <span class="gender-tag">
+        <i class="fas ${genderIcon}"></i>
+        <span data-key="gender_${p.gender === 'men' ? 'm' : p.gender === 'women' ? 'f' : 'u'}">${p.gender}</span>
+      </span>` : '';
+
+    grid.innerHTML += `
+      <div class="product-card" data-price="${p.price_sort || 0}">
+        <div class="product-img"><img src="${p.image_url}" alt="${p.name}" loading="lazy"></div>
+        <div class="product-tag">
+          <span data-key="tag_${p.tag_key.toLowerCase()}">${p.tag_key}</span>${genderTag}
+        </div>
+        <h3>${p.name}</h3>
+        <p>${p.description}</p>
+        <div class="price">${p.price}</div>
+        <a href="contact_page.html" class="btn-buy" data-key="btn_contact">Contact for Details</a>
+      </div>`;
+
+    if (loop) {
+      loop.innerHTML += `<img src="${p.image_url}" alt="${p.name}" loading="lazy">`;
+    }
+  });
+
+  const savedLang = localStorage.getItem('preferredLang') || 'en';
+  if (typeof changeLanguage === 'function') changeLanguage(savedLang);
+
+  // Attach modal tap listener to each card AFTER they exist in the DOM
+  document.querySelectorAll('.product-card').forEach(card => {
+    card.addEventListener('click', function(e) {
+      if (e.target.closest('.btn-buy')) return;
+
+      const img   = card.querySelector('.product-img').innerHTML;
+      const tag   = card.querySelector('.product-tag').outerHTML;
+      const name  = card.querySelector('h3').outerHTML;
+      const desc  = card.querySelector('p').outerHTML;
+      const price = card.querySelector('.price').outerHTML;
+      const btn   = card.querySelector('.btn-buy').outerHTML;
+
+      document.getElementById('cardOverlayContent').innerHTML =
+        `<div class="product-img" style="height:220px; margin-bottom:15px;">${img}</div>
+         ${tag}${name}${desc}${price}${btn}`;
+
+      document.getElementById('cardOverlay').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+}
+
 loadProducts();
+
+function closeCardModal() {
+  document.getElementById('cardOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Close modal when tapping the dark background
+document.getElementById('cardOverlay').addEventListener('click', function(e) {
+  if (!e.target.closest('.card-overlay-inner')) closeCardModal();
+});
