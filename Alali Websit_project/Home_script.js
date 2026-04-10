@@ -535,7 +535,7 @@ async function loadProducts() {
                     <span data-key="tag_${p.tag_key.toLowerCase()}">${p.tag_key}</span>${genderTag}
                 </div>
                 <h3>${p.name}</h3>
-                <p>${p.description}</p>
+                <p>${p.description_key || p.description || ''}</p>
                 <div class="price">${p.price}</div>
                 <a href="contact_page.html" class="btn-buy" data-key="btn_contact">Contact for Details</a>
             </div>`;
@@ -594,21 +594,23 @@ document.addEventListener('click', function(e) {
  * 9. LOAD TEAM (Team page only)
  */
 async function loadTeam() {
-    const grid = document.querySelector('.team-grid');
-    if (!grid) return;
+  const res = await fetch(`${SUPA_URL}/rest/v1/team?order=display_order.asc`, {
+    headers: { 'apikey': SUPA_KEY, 'Authorization': `Bearer ${SUPA_KEY}` }
+  });
+  const members = await res.json();
 
-    const res = await fetch(`${SUPA_URL}/rest/v1/team?order=display_order.asc`, { headers });
-    const members = await res.json();
+  const grid = document.querySelector('.team-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
 
-    grid.innerHTML = '';
-    members.forEach(m => {
-        grid.innerHTML += `
-            <div class="pro-card team-card">
-                <img src="${m.image_url}" alt="${m.name}">
-                <h3>${m.name}</h3>
-                <p>${m.role}</p>
-            </div>`;
-    });
+  members.forEach(m => {
+    grid.innerHTML += `
+      <div class="pro-card team-card">
+        <img src="${m.image_url}" alt="${m.name}">
+        <h3>${m.name}</h3>
+        <p>${m.role}</p>
+      </div>`;
+  });
 }
 
 loadTeam();

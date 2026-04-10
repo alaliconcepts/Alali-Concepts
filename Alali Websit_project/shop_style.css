@@ -879,7 +879,7 @@ body.shop-site {
 .card-overlay-inner {
     background: var(--white);
     border-radius: 20px;
-    padding: 25px 20px;
+    padding: 15px 20px 25px;
     width: 100%;
     max-width: 360px;
     max-height: 90vh;
@@ -897,16 +897,30 @@ body.shop-site {
 }
 
 .card-overlay-close {
-    position: absolute;
-    top: 12px;
-    right: 14px;
-    background: none;
+    display: block;
+    margin: 0 0 10px auto;
+    background: var(--light-gray);
     border: none;
-    font-size: 1.4rem;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
     color: var(--navy);
     cursor: pointer;
-    line-height: 1;
-    padding: 4px 8px;
+    line-height: 32px;
+    text-align: center;
+    padding: 0;
+}
+
+/* Bigger image inside modal */
+.card-overlay-inner .product-img {
+    height: 280px !important;
+    padding: 20px !important;
+    margin-bottom: 15px;
+}
+
+.card-overlay-inner .product-img img {
+    max-height: 240px !important;
 }
 
 @media (max-width: 768px) {
